@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="C:\Users\Dylan\Desktop\Dylan Studies\MSc Computer Science\Dynamic Programming, Greedy Algorithms\Coding_Practice\Module2_Greedy_Algorithms_Coin_Changing_Problem.cs" Link="Module2_Greedy_Algorithms_Coin_Changing_Problem.cs" />
+  </ItemGroup>
+
+</Project>
