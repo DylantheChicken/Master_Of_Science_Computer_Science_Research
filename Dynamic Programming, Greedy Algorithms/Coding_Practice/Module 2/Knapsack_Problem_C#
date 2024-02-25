@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    int W = 50; // Example total weight capacity
+    int[] weights = new int[] { 10, 20, 30 }; // Example weights
+    int[] values = new int[] { 60, 100, 120 }; // Example values
+
+    static Tuple< int, list<string>> maxSteamMemo (int W, int [] weights, int [] values)
+    {
+        int [] memoTable = new int[W+1];
+        int [] solutionTable = new int[W+1];
+        int k = weights.length;
+
+        for (int w = 1; w <= W; w++)
+        {
+            int maxValue = int.MinValue;
+            int maxIndex = -1;
+            for (int i = 0; i < k; i++)
+            {
+                if (w - weights[i] >= 0)
+                {
+                    int value = values[i] + T[w - weights[i]];
+                    if (value > maxValue)
+                    {
+                        maxValue = value;
+                        maxIndex = i;
+                    }
+                }
+        }
+        // Store the results in the tables
+            T[w] = maxValue;
+            S[w] = maxIndex;
+
+            list<string> stolenItemIds = new list<string>();
+            int weightRemaining = W;
+
+            while (weightRemaining >= 0)
+            {
+                int item_id = solutionTable[weightRemaining];
+                if (item_id >=0)
+                {
+                    // Python: stolen_item_ids.append('Steal Item ID %d: weight = %d, value = %f' % (item_id, weights[item_id], values[item_id]))
+                    stolenItemIds.Add($"Steal Item ID {item_id}: weight = {weights[item_id]}, value = {values[item_id]}");
+                    weightRemaining -= weights[item_id];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return Tuple.Create(T[W], stolenItemIds);
+    }
+
+}
