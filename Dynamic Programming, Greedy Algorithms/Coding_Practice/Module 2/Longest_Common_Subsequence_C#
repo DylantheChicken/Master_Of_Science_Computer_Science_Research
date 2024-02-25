@@ -1,0 +1,82 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string s1 = "ABCBDAB";
+        string s2 = "BDCAB";
+
+        Console.WriteLine("Length of LCS is " + Lcs(s1, s2, 0, 0));
+    }
+
+    static int lcs (string s1, string s2, int i, int j)
+    {
+        if (i >= s1.Length || j >= s2.Length)
+            return 0;
+        if (s1[i] == s2[j])
+            return 1 + lcs(s1, s2, i + 1, j + 1);
+        else
+            return Math.Max(lcs(s1, s2, i + 1, j), lcs(s1, s2, i, j + 1));
+
+    }
+
+    static (string lcs, List<(int, int)> matchLocations) MemoizeLcs(string s1, string s2)
+    {
+        int m = s1.Length;
+        int n = s2.Length;
+
+        int [,] memoTable = new int[m + 1, n + 1]; //multi-dimensional array to store the memoized values
+        int [,] solutionTable = new int[m + 1, n + 1]; //multi-dimensional array to store the solution
+
+        for (int i = m - 1; i >= 0; i--)
+        {
+            for (int j = n - 1; j >= 0; j--)
+            {
+                if (s1[i] == s2[j])
+                {
+                    memoTable[i, j] = 1 + memoTable[i + 1, j + 1];
+                    solutionTable[i, j] = "match";
+                }
+                else
+                {
+                    if (memoTable[i + 1, j] >= memoTable[i, j + 1])
+                    {
+                        memoTable[i, j] = memoTable[i + 1, j];
+                        solutionTable[i, j] = "right";
+                    }
+                    
+                    else
+                    {
+                        memoTable[i, j] = memoTable[i, j + 1];
+                        solutionTable[i, j] = "down";
+                    }
+                }
+            
+            }
+
+        }
+        string lcs = "";
+        list<(int, int)> matchLocations = new List<(int, int)>();
+        int i = 0, j = 0;
+
+        while (i<m && j<n)
+        {
+            if (solutionTable[i, j] == "match")
+            {
+                lcs += s1[i];
+                matchLocations.Add((i, j));
+                i++;
+                j++;
+            }
+            else if (solutionTable[i, j] == "right")
+            {
+                i++;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        return (lcs, matchLocations);
+}
